@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mulinq", "src/Mulinq/Mulinq.csproj", "{AFB8D490-8718-4434-9B68-89ECF0BA79D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mulinq.Test", "test/Mulinq.Test/Mulinq.Test.csproj", "{A8613D78-3B1D-4CBF-9351-92A02B3AD762}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFB8D490-8718-4434-9B68-89ECF0BA79D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFB8D490-8718-4434-9B68-89ECF0BA79D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFB8D490-8718-4434-9B68-89ECF0BA79D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFB8D490-8718-4434-9B68-89ECF0BA79D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8613D78-3B1D-4CBF-9351-92A02B3AD762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8613D78-3B1D-4CBF-9351-92A02B3AD762}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8613D78-3B1D-4CBF-9351-92A02B3AD762}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8613D78-3B1D-4CBF-9351-92A02B3AD762}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
