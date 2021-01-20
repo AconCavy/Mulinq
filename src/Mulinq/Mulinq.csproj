@@ -3,5 +3,18 @@
     <PropertyGroup>
         <TargetFrameworks>net5.0;netcoreapp3.1</TargetFrameworks>
     </PropertyGroup>
+    
+    <!-- NuGet -->
+    <PropertyGroup>
+        <PackageId>Mulinq</PackageId>
+        <PackageVersion>$(Version)</PackageVersion>
+        <Title>Mulinq</Title>
+        <Authors>AconCavy</Authors>
+        <Description>Mulinq is C# LINQ extensions for collections and for multidimensional arrays.</Description>
+        <PackageProjectUrl>https://github.com/AconCavy/Mulinq</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/AconCavy/Mulinq</RepositoryUrl>
+        <PackageTags>LINQ</PackageTags>
+    </PropertyGroup>
 
 </Project>
