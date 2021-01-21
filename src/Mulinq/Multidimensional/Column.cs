@@ -19,7 +19,13 @@ namespace Mulinq.Multidimensional
             if (source is null) throw new ArgumentNullException(nameof(source));
             var (row, column) = (source.GetLength(0), source.GetLength(1));
             if (index < 0 || column <= index) throw new ArgumentOutOfRangeException(nameof(index));
-            for (var i = 0; i < row; i++) yield return source[i, index];
+
+            IEnumerable<TSource> Inner()
+            {
+                for (var i = 0; i < row; i++) yield return source[i, index];
+            }
+
+            return Inner();
         }
 
         /// <summary>
@@ -41,12 +47,17 @@ namespace Mulinq.Multidimensional
             if (start < 0 || column <= start) throw new ArgumentOutOfRangeException(nameof(start));
             if (count <= 0 || column < start + count) throw new ArgumentOutOfRangeException(nameof(count));
 
-            for (var c = start; c < start + count; c++)
+            IEnumerable<IEnumerable<TSource>> Inner()
             {
-                var ret = new TSource[row];
-                for (var i = 0; i < row; i++) ret[i] = source[i, c];
-                yield return ret;
+                for (var c = start; c < start + count; c++)
+                {
+                    var ret = new TSource[row];
+                    for (var i = 0; i < row; i++) ret[i] = source[i, c];
+                    yield return ret;
+                }
             }
+
+            return Inner();
         }
     }
 }

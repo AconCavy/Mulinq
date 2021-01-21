@@ -25,7 +25,7 @@ namespace Mulinq.Test.Multidimensional
         public void ArgumentNull2DimTest()
         {
             int[,] sut = null;
-            Assert.Throws<ArgumentNullException>(() => _ = sut.AsEnumerable().ToArray());
+            Assert.Throws<ArgumentNullException>(() => _ = sut.AsEnumerable());
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace Mulinq.Test.Multidimensional
         public void ArgumentNull3DimTest()
         {
             int[,,] sut = null;
-            Assert.Throws<ArgumentNullException>(() => _ = sut.AsEnumerable().ToArray());
+            Assert.Throws<ArgumentNullException>(() => _ = sut.AsEnumerable());
         }
     }
 }
