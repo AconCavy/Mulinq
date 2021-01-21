@@ -12,7 +12,7 @@ namespace Mulinq.Multidimensional
         /// <typeparam name="TSource">The type of the elements of source.</typeparam>
         /// <returns>The sequence as a single dimension.</returns>
         /// <exception cref="ArgumentNullException">source is null.</exception>
-        public static IEnumerable<TSource> AsEnumerable<TSource>(this TSource[,] source)
+        public static IEnumerable<TSource> AsEnumerable<TSource>(this TSource[,]? source)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
             foreach (var item in source) yield return item;
@@ -25,7 +25,7 @@ namespace Mulinq.Multidimensional
         /// <typeparam name="TSource">The type of the elements of source.</typeparam>
         /// <returns>The sequence as a single dimension.</returns>
         /// <exception cref="ArgumentNullException">source is null.</exception>
-        public static IEnumerable<TSource> AsEnumerable<TSource>(this TSource[,,] source)
+        public static IEnumerable<TSource> AsEnumerable<TSource>(this TSource[,,]? source)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
             foreach (var item in source) yield return item;

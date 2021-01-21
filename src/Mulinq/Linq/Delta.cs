@@ -17,11 +17,11 @@ namespace Mulinq.Linq
         /// var delta = new[] { 1, 2, 3, 4, 5 }.Delta((x, y) => y - x);
         /// delta: { 1, 1, 1, 1 }
         /// </code>
-        public static IEnumerable<TSource> Delta<TSource>(this IEnumerable<TSource> source,
-            Func<TSource, TSource, TSource> func)
+        public static IEnumerable<TSource> Delta<TSource>(this IEnumerable<TSource>? source,
+            Func<TSource, TSource, TSource>? func)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (func == null) throw new ArgumentNullException(nameof(func));
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (func is null) throw new ArgumentNullException(nameof(func));
 
             IEnumerable<TSource> Inner()
             {

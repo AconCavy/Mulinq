@@ -16,11 +16,11 @@ namespace Mulinq.Linq
         /// <returns>The item that has the maximum value in the sequence.</returns>
         /// <exception cref="ArgumentNullException">source or selector is null.</exception>
         /// <exception cref="InvalidOperationException">source contains no elements.</exception>
-        public static TSource MaxBy<TSource, TKey>(this IEnumerable<TSource> source,
-            Func<TSource, TKey> selector, bool updateEquals = false) where TKey : IComparable<TKey>
+        public static TSource MaxBy<TSource, TKey>(this IEnumerable<TSource>? source,
+            Func<TSource, TKey>? selector, bool updateEquals = false) where TKey : IComparable<TKey>
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
 
             using var e = source.GetEnumerator();
             if (!e.MoveNext()) throw new InvalidOperationException();

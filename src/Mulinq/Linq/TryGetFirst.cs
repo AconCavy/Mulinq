@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Mulinq.Linq
 {
@@ -13,9 +14,10 @@ namespace Mulinq.Linq
         /// <typeparam name="TSource">The type of the elements of source.</typeparam>
         /// <returns>true if the source contains an element; otherwise, false.</returns>
         /// <exception cref="ArgumentNullException">source is null.</exception>
-        public static bool TryGetFirst<TSource>(this IEnumerable<TSource> source, out TSource result)
+        public static bool TryGetFirst<TSource>(this IEnumerable<TSource>? source,
+            [MaybeNullWhen(false)] out TSource result)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source is null) throw new ArgumentNullException(nameof(source));
             using var e = source.GetEnumerator();
             var exist = e.MoveNext();
             result = exist ? e.Current : default;
@@ -31,11 +33,11 @@ namespace Mulinq.Linq
         /// <typeparam name="TSource">The type of the elements of source.</typeparam>
         /// <returns>true if the source contains an element with the predicated; otherwise, false.</returns>
         /// <exception cref="ArgumentNullException">source or predicate is null.</exception>
-        public static bool TryGetFirst<TSource>(this IEnumerable<TSource> source, out TSource result,
-            Predicate<TSource> predicate)
+        public static bool TryGetFirst<TSource>(this IEnumerable<TSource>? source,
+            [MaybeNullWhen(false)] out TSource result, Predicate<TSource>? predicate)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (predicate is null) throw new ArgumentNullException(nameof(predicate));
             foreach (var current in source)
             {
                 if (!predicate(current)) continue;
