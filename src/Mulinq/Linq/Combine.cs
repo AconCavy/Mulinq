@@ -19,9 +19,9 @@ namespace Mulinq.Linq
         /// var combination = new []{ 1, 2, 3 }.Combine(2);
         /// combination: { { 1, 2 }, { 1, 3 }, { 2, 3 } }
         /// </code>
-        public static IEnumerable<IEnumerable<TSource>> Combine<TSource>(this IEnumerable<TSource> source, int count)
+        public static IEnumerable<IEnumerable<TSource>> Combine<TSource>(this IEnumerable<TSource>? source, int count)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source is null) throw new ArgumentNullException(nameof(source));
 
             IEnumerable<IEnumerable<TSource>> Inner()
             {

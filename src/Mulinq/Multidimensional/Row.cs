@@ -14,7 +14,7 @@ namespace Mulinq.Multidimensional
         /// <returns>The sequence of the specified row of the 2-dimensional array.</returns>
         /// <exception cref="ArgumentNullException">source is null.</exception>
         /// <exception cref="ArgumentOutOfRangeException">index &lt; 0 or row &lt;= index.</exception>
-        public static IEnumerable<TSource> Row<TSource>(this TSource[,] source, int index)
+        public static IEnumerable<TSource> Row<TSource>(this TSource[,]? source, int index)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
             var (row, column) = (source.GetLength(0), source.GetLength(1));
@@ -34,7 +34,7 @@ namespace Mulinq.Multidimensional
         /// <exception cref="ArgumentOutOfRangeException">
         ///     start &lt; 0 or row &lt;= start or count &lt;= 0 or row &lt; start + count
         /// </exception>
-        public static IEnumerable<IEnumerable<TSource>> Rows<TSource>(this TSource[,] source, int start, int count)
+        public static IEnumerable<IEnumerable<TSource>> Rows<TSource>(this TSource[,]? source, int start, int count)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
             var (row, column) = (source.GetLength(0), source.GetLength(1));

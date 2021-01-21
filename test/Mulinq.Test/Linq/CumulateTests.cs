@@ -17,7 +17,7 @@ namespace Mulinq.Test.Linq
             expected[0] = 1;
             for (var i = 1; i <= count; i++) expected[i] = expected[i - 1] * (count + i);
 
-            var actual = items.Cumulate(1L, MultipleLongInt);
+            var actual = items.Cumulate(MultipleLongInt, 1L);
 
             Assert.That(actual, Is.EqualTo(expected));
         }
@@ -53,7 +53,7 @@ namespace Mulinq.Test.Linq
         {
             IEnumerable<int> items = null;
             Assert.Throws<ArgumentNullException>(() => items.Cumulate(AddInt));
-            Assert.Throws<ArgumentNullException>(() => items.Cumulate(0L, MultipleLongInt));
+            Assert.Throws<ArgumentNullException>(() => items.Cumulate(MultipleLongInt, 0L));
             Assert.Throws<ArgumentNullException>(() => items.Cumulate<int, long>(MultipleLongInt));
         }
 
@@ -62,7 +62,7 @@ namespace Mulinq.Test.Linq
         {
             var items = Enumerable.Range(0, 5);
             Assert.Throws<ArgumentNullException>(() => items.Cumulate(null));
-            Assert.Throws<ArgumentNullException>(() => items.Cumulate(0L, null));
+            Assert.Throws<ArgumentNullException>(() => items.Cumulate(null, 0L));
             Assert.Throws<ArgumentNullException>(() => items.Cumulate<int, long>(null));
         }
 

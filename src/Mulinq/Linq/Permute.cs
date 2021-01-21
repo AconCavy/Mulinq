@@ -19,9 +19,9 @@ namespace Mulinq.Linq
         /// var permutation = new []{ 1, 2, 3 }.Permute(3);
         /// permutation: { { 1, 2, 3 }, { 1, 3, 2 }, { 2, 1, 3 }, { 2, 3, 1 }, { 3, 1, 2 }, { 3, 2, 1 } }
         /// </code>
-        public static IEnumerable<IEnumerable<TSource>> Permute<TSource>(this IEnumerable<TSource> source, int count)
+        public static IEnumerable<IEnumerable<TSource>> Permute<TSource>(this IEnumerable<TSource>? source, int count)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source is null) throw new ArgumentNullException(nameof(source));
 
             IEnumerable<IEnumerable<TSource>> Inner()
             {
