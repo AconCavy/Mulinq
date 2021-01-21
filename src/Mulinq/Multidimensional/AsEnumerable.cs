@@ -15,7 +15,13 @@ namespace Mulinq.Multidimensional
         public static IEnumerable<TSource> AsEnumerable<TSource>(this TSource[,]? source)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
-            foreach (var item in source) yield return item;
+
+            IEnumerable<TSource> Inner()
+            {
+                foreach (var item in source) yield return item;
+            }
+
+            return Inner();
         }
 
         /// <summary>
@@ -28,7 +34,13 @@ namespace Mulinq.Multidimensional
         public static IEnumerable<TSource> AsEnumerable<TSource>(this TSource[,,]? source)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
-            foreach (var item in source) yield return item;
+
+            IEnumerable<TSource> Inner()
+            {
+                foreach (var item in source) yield return item;
+            }
+
+            return Inner();
         }
     }
 }

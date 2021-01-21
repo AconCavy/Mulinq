@@ -63,13 +63,13 @@ namespace Mulinq.Test.Multidimensional
         {
             const int n = 3;
             var sut = new int[n, n];
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = sut.Row(-1).ToArray());
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = sut.Row(n).ToArray());
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = sut.Row(-1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = sut.Row(n));
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = sut.Rows(-1, 1).ToArray());
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = sut.Rows(n, 1).ToArray());
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = sut.Rows(0, -1).ToArray());
-            Assert.Throws<ArgumentOutOfRangeException>(() => _ = sut.Rows(1, n).ToArray());
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = sut.Rows(-1, 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = sut.Rows(n, 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = sut.Rows(0, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = sut.Rows(1, n));
         }
     }
 }
