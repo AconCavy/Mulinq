@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Mulinq.Multidimensional;
 using NUnit.Framework;
@@ -21,6 +22,13 @@ namespace Mulinq.Test.Multidimensional
         }
 
         [Test]
+        public void ArgumentNull2DimTest()
+        {
+            int[,] sut = null;
+            Assert.Throws<ArgumentNullException>(() => _ = sut.AsEnumerable().ToArray());
+        }
+
+        [Test]
         public void AsEnumerable3DimTest()
         {
             const int n = 5;
@@ -33,6 +41,13 @@ namespace Mulinq.Test.Multidimensional
             var expected = Enumerable.Range(0, n * n * n);
             var actual = sut.AsEnumerable();
             Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void ArgumentNull3DimTest()
+        {
+            int[,,] sut = null;
+            Assert.Throws<ArgumentNullException>(() => _ = sut.AsEnumerable().ToArray());
         }
     }
 }
