@@ -53,7 +53,7 @@ namespace Mulinq.Test.Multidimensional
         [Test]
         public void ArgumentNullTest()
         {
-            int[,] sut = null;
+            int[,]? sut = null;
             Assert.Throws<ArgumentNullException>(() => _ = sut.Row(0).ToArray());
             Assert.Throws<ArgumentNullException>(() => _ = sut.Rows(0, 1).ToArray());
         }

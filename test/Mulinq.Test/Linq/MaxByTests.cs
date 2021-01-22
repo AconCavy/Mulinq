@@ -14,7 +14,7 @@ namespace Mulinq.Test.Linq
             const int count = 10;
             var items = Enumerable.Range(1, count).Select(x => new SampleClass(x, count)).ToArray();
             items = items.Concat(items.Reverse()).ToArray();
-            SampleClass expected = null;
+            SampleClass? expected = null;
             var max = int.MinValue;
             foreach (var x in items)
             {
@@ -99,10 +99,10 @@ namespace Mulinq.Test.Linq
         [Test]
         public void NullSourceTest()
         {
-            IEnumerable<SampleClass> classes = null;
+            IEnumerable<SampleClass>? classes = null;
             Assert.Throws<ArgumentNullException>(() => classes.MaxBy(x => x.A));
 
-            IEnumerable<SampleStruct> structs = null;
+            IEnumerable<SampleStruct>? structs = null;
             Assert.Throws<ArgumentNullException>(() => structs.MaxBy(x => x.A));
         }
 

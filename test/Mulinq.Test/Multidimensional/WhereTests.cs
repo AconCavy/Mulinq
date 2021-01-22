@@ -14,7 +14,6 @@ namespace Mulinq.Test.Multidimensional
         public void Where2DimTest(int r, int c)
         {
             static bool Predicate(int x) => x % 2 == 0;
-            const int multiplier = 3;
             var sut = new int[r, c];
             for (var i = 0; i < r; i++)
                 for (var j = 0; j < c; j++)

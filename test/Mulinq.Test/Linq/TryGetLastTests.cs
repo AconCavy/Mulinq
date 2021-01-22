@@ -61,7 +61,7 @@ namespace Mulinq.Test.Linq
         [Test]
         public void NullSourceTest()
         {
-            IEnumerable<int> items = null;
+            IEnumerable<int>? items = null;
             Assert.Throws<ArgumentNullException>(() => items.TryGetLast(out _));
             Assert.Throws<ArgumentNullException>(() => items.TryGetLast(out _, x => x % 2 == 0));
         }
