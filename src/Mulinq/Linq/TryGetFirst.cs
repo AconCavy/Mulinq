@@ -34,7 +34,7 @@ namespace Mulinq.Linq
         /// <returns>true if the source contains an element with the predicated; otherwise, false.</returns>
         /// <exception cref="ArgumentNullException">source or predicate is null.</exception>
         public static bool TryGetFirst<TSource>(this IEnumerable<TSource>? source,
-            [MaybeNullWhen(false)] out TSource result, Predicate<TSource>? predicate)
+            [MaybeNullWhen(false)] out TSource result, Func<TSource, bool>? predicate)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (predicate is null) throw new ArgumentNullException(nameof(predicate));
