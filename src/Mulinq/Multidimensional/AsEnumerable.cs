@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Mulinq.Multidimensional
 {
-    public static partial class EnumerableExtensions
+    public static partial class ArrayExtension
     {
         /// <summary>
         ///     Returns the sequence as a single dimension.
