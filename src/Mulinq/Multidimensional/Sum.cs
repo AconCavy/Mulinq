@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 
 namespace Mulinq.Multidimensional
 {
@@ -203,8 +202,18 @@ namespace Mulinq.Multidimensional
         /// <returns>The sum of the projected values.</returns>
         /// <exception cref="ArgumentNullException">source or selector is null.</exception>
         /// <exception cref="OverflowException">The sum is larger than MaxValue.</exception>
-        public static Int32 Sum<TSource>(this TSource[,]? source, Func<TSource, Int32>? selector) =>
-            source.Select(selector).Sum();
+        public static Int32 Sum<TSource>(this TSource[,]? source, Func<TSource, Int32>? selector)
+        {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            var sum = 0;
+            checked
+            {
+                foreach (var v in source) sum += selector(v);
+            }
+
+            return sum;
+        }
 
         /// <summary>
         ///     Computes the sum of the 2d-array of nullable Int32 values that are obtained by invoking a transform function on
@@ -216,8 +225,24 @@ namespace Mulinq.Multidimensional
         /// <returns>The sum of the projected values.</returns>
         /// <exception cref="ArgumentNullException">source or selector is null.</exception>
         /// <exception cref="OverflowException">The sum is larger than MaxValue.</exception>
-        public static Int32? Sum<TSource>(this TSource[,]? source, Func<TSource, Int32?>? selector) =>
-            source.Select(selector).Sum();
+        public static Int32? Sum<TSource>(this TSource[,]? source, Func<TSource, Int32?>? selector)
+        {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            Int32? value = 0;
+            var hasValue = false;
+            checked
+            {
+                foreach (var x in source)
+                {
+                    var y = selector(x);
+                    hasValue |= y.HasValue;
+                    value += y ?? 0;
+                }
+            }
+
+            return hasValue ? value : null;
+        }
 
         /// <summary>
         ///     Computes the sum of the 2d-array of Int64 values that are obtained by invoking a transform function on each element
@@ -229,8 +254,18 @@ namespace Mulinq.Multidimensional
         /// <returns>The sum of the projected values.</returns>
         /// <exception cref="ArgumentNullException">source or selector is null.</exception>
         /// <exception cref="OverflowException">The sum is larger than MaxValue.</exception>
-        public static Int64 Sum<TSource>(this TSource[,]? source, Func<TSource, Int64>? selector) =>
-            source.Select(selector).Sum();
+        public static Int64 Sum<TSource>(this TSource[,]? source, Func<TSource, Int64>? selector)
+        {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            Int64 sum = 0;
+            checked
+            {
+                foreach (var v in source) sum += selector(v);
+            }
+
+            return sum;
+        }
 
         /// <summary>
         ///     Computes the sum of the 2d-array of nullable Int64 values that are obtained by invoking a transform function on
@@ -242,8 +277,24 @@ namespace Mulinq.Multidimensional
         /// <returns>The sum of the projected values.</returns>
         /// <exception cref="ArgumentNullException">source or selector is null.</exception>
         /// <exception cref="OverflowException">The sum is larger than MaxValue.</exception>
-        public static Int64? Sum<TSource>(this TSource[,]? source, Func<TSource, Int64?>? selector) =>
-            source.Select(selector).Sum();
+        public static Int64? Sum<TSource>(this TSource[,]? source, Func<TSource, Int64?>? selector)
+        {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            Int64? value = 0;
+            var hasValue = false;
+            checked
+            {
+                foreach (var x in source)
+                {
+                    var y = selector(x);
+                    hasValue |= y.HasValue;
+                    value += y ?? 0;
+                }
+            }
+
+            return hasValue ? value : null;
+        }
 
         /// <summary>
         ///     Computes the sum of the 2d-array of Single values that are obtained by invoking a transform function on each
@@ -254,8 +305,15 @@ namespace Mulinq.Multidimensional
         /// <typeparam name="TSource">The type of the elements of source.</typeparam>
         /// <returns>The sum of the projected values.</returns>
         /// <exception cref="ArgumentNullException">source or selector is null.</exception>
-        public static Single Sum<TSource>(this TSource[,]? source, Func<TSource, Single>? selector) =>
-            source.Select(selector).Sum();
+        public static Single Sum<TSource>(this TSource[,]? source, Func<TSource, Single>? selector)
+        {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            Single sum = 0;
+            foreach (var v in source) sum += selector(v);
+
+            return sum;
+        }
 
         /// <summary>
         ///     Computes the sum of the 2d-array of nullable Single values that are obtained by invoking a transform function on
@@ -266,8 +324,21 @@ namespace Mulinq.Multidimensional
         /// <typeparam name="TSource">The type of the elements of source.</typeparam>
         /// <returns>The sum of the projected values.</returns>
         /// <exception cref="ArgumentNullException">source or selector is null.</exception>
-        public static Single? Sum<TSource>(this TSource[,]? source, Func<TSource, Single?>? selector) =>
-            source.Select(selector).Sum();
+        public static Single? Sum<TSource>(this TSource[,]? source, Func<TSource, Single?>? selector)
+        {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            Single? value = 0;
+            var hasValue = false;
+            foreach (var x in source)
+            {
+                var y = selector(x);
+                hasValue |= y.HasValue;
+                value += y ?? 0;
+            }
+
+            return hasValue ? value : null;
+        }
 
         /// <summary>
         ///     Computes the sum of the 2d-array of Double values that are obtained by invoking a transform function on each
@@ -278,8 +349,15 @@ namespace Mulinq.Multidimensional
         /// <typeparam name="TSource">The type of the elements of source.</typeparam>
         /// <returns>The sum of the projected values.</returns>
         /// <exception cref="ArgumentNullException">source or selector is null.</exception>
-        public static Double Sum<TSource>(this TSource[,]? source, Func<TSource, Double>? selector) =>
-            source.Select(selector).Sum();
+        public static Double Sum<TSource>(this TSource[,]? source, Func<TSource, Double>? selector)
+        {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            Double sum = 0;
+            foreach (var v in source) sum += selector(v);
+
+            return sum;
+        }
 
         /// <summary>
         ///     Computes the sum of the 2d-array of nullable Double values that are obtained by invoking a transform function on
@@ -290,8 +368,21 @@ namespace Mulinq.Multidimensional
         /// <typeparam name="TSource">The type of the elements of source.</typeparam>
         /// <returns>The sum of the projected values.</returns>
         /// <exception cref="ArgumentNullException">source or selector is null.</exception>
-        public static Double? Sum<TSource>(this TSource[,]? source, Func<TSource, Double?>? selector) =>
-            source.Select(selector).Sum();
+        public static Double? Sum<TSource>(this TSource[,]? source, Func<TSource, Double?>? selector)
+        {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            Double? value = 0;
+            var hasValue = false;
+            foreach (var x in source)
+            {
+                var y = selector(x);
+                hasValue |= y.HasValue;
+                value += y ?? 0;
+            }
+
+            return hasValue ? value : null;
+        }
 
         /// <summary>
         ///     Computes the sum of the 2d-array of Decimal values that are obtained by invoking a transform function on each
@@ -302,8 +393,15 @@ namespace Mulinq.Multidimensional
         /// <typeparam name="TSource">The type of the elements of source.</typeparam>
         /// <returns>The sum of the projected values.</returns>
         /// <exception cref="ArgumentNullException">source or selector is null.</exception>
-        public static Decimal Sum<TSource>(this TSource[,]? source, Func<TSource, Decimal>? selector) =>
-            source.Select(selector).Sum();
+        public static Decimal Sum<TSource>(this TSource[,]? source, Func<TSource, Decimal>? selector)
+        {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            Decimal sum = 0;
+            foreach (var v in source) sum += selector(v);
+
+            return sum;
+        }
 
         /// <summary>
         ///     Computes the sum of the 2d-array of nullable Decimal values that are obtained by invoking a transform function on
@@ -314,7 +412,20 @@ namespace Mulinq.Multidimensional
         /// <typeparam name="TSource">The type of the elements of source.</typeparam>
         /// <returns>The sum of the projected values.</returns>
         /// <exception cref="ArgumentNullException">source or selector is null.</exception>
-        public static Decimal? Sum<TSource>(this TSource[,]? source, Func<TSource, Decimal?>? selector) =>
-            source.Select(selector).Sum();
+        public static Decimal? Sum<TSource>(this TSource[,]? source, Func<TSource, Decimal?>? selector)
+        {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            Decimal? value = 0;
+            var hasValue = false;
+            foreach (var x in source)
+            {
+                var y = selector(x);
+                hasValue |= y.HasValue;
+                value += y ?? 0;
+            }
+
+            return hasValue ? value : null;
+        }
     }
 }
