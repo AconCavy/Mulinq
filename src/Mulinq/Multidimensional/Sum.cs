@@ -33,18 +33,18 @@ namespace Mulinq.Multidimensional
         public static Int32? Sum(this Int32?[,]? source)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
-            Int32? value = 0;
+            Int32? sum = 0;
             var hasValue = false;
             checked
             {
-                foreach (var x in source)
+                foreach (var v in source)
                 {
-                    hasValue |= x.HasValue;
-                    value += x ?? 0;
+                    hasValue |= v.HasValue;
+                    sum += v ?? 0;
                 }
             }
 
-            return hasValue ? value : null;
+            return hasValue ? sum : null;
         }
 
         /// <summary>
@@ -76,18 +76,18 @@ namespace Mulinq.Multidimensional
         public static Int64? Sum(this Int64?[,]? source)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
-            Int64? value = 0;
+            Int64? sum = 0;
             var hasValue = false;
             checked
             {
-                foreach (var x in source)
+                foreach (var v in source)
                 {
-                    hasValue |= x.HasValue;
-                    value += x ?? 0;
+                    hasValue |= v.HasValue;
+                    sum += v ?? 0;
                 }
             }
 
-            return hasValue ? value : null;
+            return hasValue ? sum : null;
         }
 
         /// <summary>
@@ -113,15 +113,15 @@ namespace Mulinq.Multidimensional
         public static Single? Sum(this Single?[,]? source)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
-            Double? value = 0;
+            Double? sum = 0;
             var hasValue = false;
-            foreach (var x in source)
+            foreach (var v in source)
             {
-                hasValue |= x.HasValue;
-                value += x ?? 0;
+                hasValue |= v.HasValue;
+                sum += v ?? 0;
             }
 
-            return hasValue ? (Single?)value : null;
+            return hasValue ? (Single?)sum : null;
         }
 
         /// <summary>
@@ -147,15 +147,15 @@ namespace Mulinq.Multidimensional
         public static Double? Sum(this Double?[,]? source)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
-            Double? value = 0;
+            Double? sum = 0;
             var hasValue = false;
-            foreach (var x in source)
+            foreach (var v in source)
             {
-                hasValue |= x.HasValue;
-                value += x ?? 0;
+                hasValue |= v.HasValue;
+                sum += v ?? 0;
             }
 
-            return hasValue ? value : null;
+            return hasValue ? sum : null;
         }
 
         /// <summary>
@@ -181,15 +181,15 @@ namespace Mulinq.Multidimensional
         public static Decimal? Sum(this Decimal?[,]? source)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
-            Decimal? value = 0;
+            Decimal? sum = 0;
             var hasValue = false;
-            foreach (var x in source)
+            foreach (var v in source)
             {
-                hasValue |= x.HasValue;
-                value += x ?? 0;
+                hasValue |= v.HasValue;
+                sum += v ?? 0;
             }
 
-            return hasValue ? value : null;
+            return hasValue ? sum : null;
         }
 
         /// <summary>
@@ -229,19 +229,19 @@ namespace Mulinq.Multidimensional
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (selector is null) throw new ArgumentNullException(nameof(selector));
-            Int32? value = 0;
+            Int32? sum = 0;
             var hasValue = false;
             checked
             {
-                foreach (var x in source)
+                foreach (var v in source)
                 {
-                    var y = selector(x);
-                    hasValue |= y.HasValue;
-                    value += y ?? 0;
+                    var x = selector(v);
+                    hasValue |= x.HasValue;
+                    sum += x ?? 0;
                 }
             }
 
-            return hasValue ? value : null;
+            return hasValue ? sum : null;
         }
 
         /// <summary>
@@ -281,19 +281,19 @@ namespace Mulinq.Multidimensional
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (selector is null) throw new ArgumentNullException(nameof(selector));
-            Int64? value = 0;
+            Int64? sum = 0;
             var hasValue = false;
             checked
             {
-                foreach (var x in source)
+                foreach (var v in source)
                 {
-                    var y = selector(x);
-                    hasValue |= y.HasValue;
-                    value += y ?? 0;
+                    var x = selector(v);
+                    hasValue |= x.HasValue;
+                    sum += x ?? 0;
                 }
             }
 
-            return hasValue ? value : null;
+            return hasValue ? sum : null;
         }
 
         /// <summary>
@@ -328,16 +328,16 @@ namespace Mulinq.Multidimensional
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (selector is null) throw new ArgumentNullException(nameof(selector));
-            Single? value = 0;
+            Single? sum = 0;
             var hasValue = false;
-            foreach (var x in source)
+            foreach (var v in source)
             {
-                var y = selector(x);
-                hasValue |= y.HasValue;
-                value += y ?? 0;
+                var x = selector(v);
+                hasValue |= x.HasValue;
+                sum += x ?? 0;
             }
 
-            return hasValue ? value : null;
+            return hasValue ? sum : null;
         }
 
         /// <summary>
@@ -372,16 +372,16 @@ namespace Mulinq.Multidimensional
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (selector is null) throw new ArgumentNullException(nameof(selector));
-            Double? value = 0;
+            Double? sum = 0;
             var hasValue = false;
-            foreach (var x in source)
+            foreach (var v in source)
             {
-                var y = selector(x);
-                hasValue |= y.HasValue;
-                value += y ?? 0;
+                var x = selector(v);
+                hasValue |= x.HasValue;
+                sum += x ?? 0;
             }
 
-            return hasValue ? value : null;
+            return hasValue ? sum : null;
         }
 
         /// <summary>
@@ -416,16 +416,16 @@ namespace Mulinq.Multidimensional
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (selector is null) throw new ArgumentNullException(nameof(selector));
-            Decimal? value = 0;
+            Decimal? sum = 0;
             var hasValue = false;
-            foreach (var x in source)
+            foreach (var v in source)
             {
-                var y = selector(x);
-                hasValue |= y.HasValue;
-                value += y ?? 0;
+                var x = selector(v);
+                hasValue |= x.HasValue;
+                sum += x ?? 0;
             }
 
-            return hasValue ? value : null;
+            return hasValue ? sum : null;
         }
     }
 }

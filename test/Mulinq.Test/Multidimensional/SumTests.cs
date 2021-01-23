@@ -471,5 +471,54 @@ namespace Mulinq.Test.Multidimensional
         }
 
         #endregion
+
+        #region NoElements
+
+        [Test]
+        public void NullableInt32NoElementsTest()
+        {
+            const int n = 0;
+            var sut = new int?[n, n];
+            var actual = sut.Sum();
+            Assert.That(actual, Is.Null);
+        }
+
+        [Test]
+        public void NullableInt64NoElementsTest()
+        {
+            const int n = 1;
+            var sut = new long?[n, n];
+            var actual = sut.Sum();
+            Assert.That(actual, Is.Null);
+        }
+
+        [Test]
+        public void NullableSingleNoElementsTest()
+        {
+            const int n = 1;
+            var sut = new float?[n, n];
+            var actual = sut.Sum();
+            Assert.That(actual, Is.Null);
+        }
+
+        [Test]
+        public void NullableDoubleNoElementsTest()
+        {
+            const int n = 1;
+            var sut = new double?[n, n];
+            var actual = sut.Sum();
+            Assert.That(actual, Is.Null);
+        }
+
+        [Test]
+        public void NullableDecimalNoElementsTest()
+        {
+            const int n = 1;
+            var sut = new Decimal?[n, n];
+            var actual = sut.Sum();
+            Assert.That(actual, Is.Null);
+        }
+
+        #endregion
     }
 }
