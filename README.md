@@ -5,7 +5,7 @@ C# LINQ extensions for collections and for multidimensional arrays.
 ## Supported frameworks
 
 - .NET Core 3.1
-- .NET 5.0
+- .NET 6.0
 
 
 ## Installation
