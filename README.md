@@ -66,6 +66,11 @@ dotnet add package Mulinq
     - Max
     - Min
 
+## Notes
+
+Some Linq extensions have been added to System.Linq in .NET 6.0.
+If you want to use LINQ extensions of Mulinq, you need to add `using static Mulinq.Linq.EnumerableExtension;` for your source code in .NET 6.0.
+
 ## License
 
 This library is under the [MIT License](https://github.com/AconCavy/Mulinq/blob/main/LICENSE)
