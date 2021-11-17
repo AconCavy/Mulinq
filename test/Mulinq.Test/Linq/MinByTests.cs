@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mulinq.Linq;
 using NUnit.Framework;
 
 namespace Mulinq.Test.Linq
 {
+    using static Mulinq.Linq.EnumerableExtension;
+
     public class MinByTests
     {
         [Test]

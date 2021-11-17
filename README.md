@@ -5,7 +5,7 @@ C# LINQ extensions for collections and for multidimensional arrays.
 ## Supported frameworks
 
 - .NET Core 3.1
-- .NET 5.0
+- .NET 6.0
 
 
 ## Installation
@@ -65,6 +65,11 @@ dotnet add package Mulinq
     - Count
     - Max
     - Min
+
+## Notes
+
+Some Linq extensions have been added to System.Linq in .NET 6.0.
+If you want to use LINQ extensions of Mulinq, you need to add `using static Mulinq.Linq.EnumerableExtension;` for your source code in .NET 6.0.
 
 ## License
 

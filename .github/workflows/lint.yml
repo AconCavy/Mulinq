@@ -13,11 +13,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET Core
+    - name: Setup .NET 6.0
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.x
-    - name: Install dotnet-format
-      run: dotnet tool update -g dotnet-format
+        dotnet-version: 6.0.x
     - name: Lint
-      run: dotnet format --check --verbosity diagnostic
+      run: dotnet format --verify-no-changes --verbosity diagnostic
