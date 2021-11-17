@@ -6,9 +6,6 @@ on:
   pull_request:
     branches: [ main ]
 
-env:
-  DOTNET_VERSION: 6.0.x
-
 jobs:
   build:
 
@@ -16,9 +13,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET
+    - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
+        dotnet-version: 3.1.x
+    - name: Install dotnet-format
+      run: dotnet tool update -g dotnet-format
     - name: Lint
       run: dotnet format --check --verbosity diagnostic
