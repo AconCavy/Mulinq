@@ -23,35 +23,47 @@ public static partial class EnumerableExtension
         {
             var items = source.ToArray();
             if (count <= 0 || items.Length < count) throw new ArgumentOutOfRangeException(nameof(count));
-            var idx = 0;
-            var ret = new TSource[count];
-            foreach (var x in Combination(items.Length, count))
+            var n = items.Length;
+            var indices = new int[n];
+            for (var i = 0; i < indices.Length; i++)
             {
-                ret[idx++] = items[x];
-                if (idx == count) yield return ret;
-                idx %= count;
-            }
-        }
-
-        return Inner();
-    }
-
-    private static IEnumerable<int> Combination(int n, int r)
-    {
-        var items = new int[r];
-
-        IEnumerable<int> Inner(int step = 0, int value = 0)
-        {
-            if (step >= r)
-            {
-                foreach (var x in items) yield return x;
-                yield break;
+                indices[i] = i;
             }
 
-            for (var i = value; i <= n - r + step; i++)
+            var result = new TSource[count];
+
+            void Fill()
             {
-                items[step] = i;
-                foreach (var x in Inner(step + 1, i + 1)) yield return x;
+                for (var i = 0; i < count; i++)
+                {
+                    result[i] = items[indices[i]];
+                }
+            }
+
+            Fill();
+            yield return result;
+            while (true)
+            {
+                var done = true;
+                var idx = 0;
+                for (var i = count - 1; i >= 0; i--)
+                {
+                    if (indices[i] == i + n - count) continue;
+                    idx = i;
+                    done = false;
+                    break;
+                }
+
+                if (done) yield break;
+
+                indices[idx]++;
+                for (var i = idx; i + 1 < count; i++)
+                {
+                    indices[i + 1] = indices[i] + 1;
+                }
+
+                Fill();
+                yield return result;
             }
         }
 
