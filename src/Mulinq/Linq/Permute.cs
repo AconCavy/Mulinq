@@ -23,39 +23,57 @@ public static partial class EnumerableExtension
         {
             var items = source.ToArray();
             if (count <= 0 || items.Length < count) throw new ArgumentOutOfRangeException(nameof(count));
-            var idx = 0;
-            var ret = new TSource[count];
-            foreach (var x in Permutation(items.Length, count))
+            var n = items.Length;
+            var indices = new int[n];
+            for (var i = 0; i < indices.Length; i++)
             {
-                ret[idx++] = items[x];
-                if (idx == count) yield return ret;
-                idx %= count;
-            }
-        }
-
-        return Inner();
-    }
-
-    private static IEnumerable<int> Permutation(int n, int r)
-    {
-        var items = new int[r];
-        var used = new bool[n];
-
-        IEnumerable<int> Inner(int step = 0)
-        {
-            if (step >= r)
-            {
-                foreach (var x in items) yield return x;
-                yield break;
+                indices[i] = i;
             }
 
-            for (var i = 0; i < n; i++)
+            var cycles = new int[count];
+            for (var i = 0; i < cycles.Length; i++)
             {
-                if (used[i]) continue;
-                used[i] = true;
-                items[step] = i;
-                foreach (var x in Inner(step + 1)) yield return x;
-                used[i] = false;
+                cycles[i] = n - i;
+            }
+
+            var result = new TSource[count];
+
+            void Fill()
+            {
+                for (var i = 0; i < count; i++)
+                {
+                    result[i] = items[indices[i]];
+                }
+            }
+
+            Fill();
+            yield return result;
+            while (true)
+            {
+                var done = true;
+                for (var i = count - 1; i >= 0; i--)
+                {
+                    cycles[i]--;
+                    if (cycles[i] == 0)
+                    {
+                        for (var j = i; j + 1 < indices.Length; j++)
+                        {
+                            (indices[j], indices[j + 1]) = (indices[j + 1], indices[j]);
+                        }
+
+                        cycles[i] = n - i;
+                    }
+                    else
+                    {
+                        (indices[i], indices[^cycles[i]]) = (indices[^cycles[i]], indices[i]);
+                        Fill();
+                        yield return result;
+                        done = false;
+                        break;
+                    }
+                }
+
+                if (done) yield break;
             }
         }
 
