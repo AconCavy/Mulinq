@@ -4,73 +4,72 @@ using System.Linq;
 using Mulinq.Linq;
 using NUnit.Framework;
 
-namespace Mulinq.Test.Linq
+namespace Mulinq.Test.Linq;
+
+public class TryGetFirstTests
 {
-    public class TryGetFirstTests
+    [Test]
+    public void TryGetFirstTest()
     {
-        [Test]
-        public void TryGetFirstTest()
-        {
-            const int count = 10;
-            var items = Enumerable.Range(1, count).ToArray();
-            const int expected = 1;
+        const int count = 10;
+        var items = Enumerable.Range(1, count).ToArray();
+        const int expected = 1;
 
-            var exist = items.TryGetFirst(out var actual);
+        var exist = items.TryGetFirst(out var actual);
 
-            Assert.That(exist, Is.True);
-            Assert.That(actual, Is.EqualTo(expected));
-        }
+        Assert.That(exist, Is.True);
+        Assert.That(actual, Is.EqualTo(expected));
+    }
 
-        [Test]
-        public void TryGetFirstWithPredicateTest()
-        {
-            const int count = 10;
-            var items = Enumerable.Range(0, count).ToArray();
-            const int expected = 1;
+    [Test]
+    public void TryGetFirstWithPredicateTest()
+    {
+        const int count = 10;
+        var items = Enumerable.Range(0, count).ToArray();
+        const int expected = 1;
 
-            var exist = items.TryGetFirst(out var actual, x => x % 2 == 1);
+        var exist = items.TryGetFirst(out var actual, x => x % 2 == 1);
 
-            Assert.That(exist, Is.True);
-            Assert.That(actual, Is.EqualTo(expected));
-        }
+        Assert.That(exist, Is.True);
+        Assert.That(actual, Is.EqualTo(expected));
+    }
 
-        [Test]
-        public void DoesNotExistTest()
-        {
-            var items = Array.Empty<int>();
-            const int expected = 0;
+    [Test]
+    public void DoesNotExistTest()
+    {
+        var items = Array.Empty<int>();
+        const int expected = 0;
 
-            var exist = items.TryGetFirst(out var actual);
+        var exist = items.TryGetFirst(out var actual);
 
-            Assert.That(exist, Is.False);
-            Assert.That(actual, Is.EqualTo(expected));
-        }
+        Assert.That(exist, Is.False);
+        Assert.That(actual, Is.EqualTo(expected));
+    }
 
-        [Test]
-        public void DoesNotExistWithPredicateTest()
-        {
-            var items = Enumerable.Range(1, 5).Select(x => x * 2);
-            const int expected = 0;
+    [Test]
+    public void DoesNotExistWithPredicateTest()
+    {
+        var items = Enumerable.Range(1, 5).Select(x => x * 2);
+        const int expected = 0;
 
-            var exist = items.TryGetFirst(out var actual, x => x % 2 == 1);
+        var exist = items.TryGetFirst(out var actual, x => x % 2 == 1);
 
-            Assert.That(exist, Is.False);
-            Assert.That(actual, Is.EqualTo(expected));
-        }
+        Assert.That(exist, Is.False);
+        Assert.That(actual, Is.EqualTo(expected));
+    }
 
-        [Test]
-        public void NullSourceTest()
-        {
-            IEnumerable<int>? items = null;
-            Assert.Throws<ArgumentNullException>(() => items.TryGetFirst(out _));
-            Assert.Throws<ArgumentNullException>(() => items.TryGetFirst(out _, x => x % 2 == 0));
-        }
+    [Test]
+    public void NullSourceTest()
+    {
+        IEnumerable<int>? items = null;
+        Assert.Throws<ArgumentNullException>(() => items.TryGetFirst(out _));
+        Assert.Throws<ArgumentNullException>(() => items.TryGetFirst(out _, x => x % 2 == 0));
+    }
 
-        [Test]
-        public void NullPredicateTest()
-        {
-            var items = Enumerable.Range(0, 10);
-            Assert.Throws<ArgumentNullException>(() => items.TryGetFirst(out _, null));
-        }
+    [Test]
+    public void NullPredicateTest()
+    {
+        var items = Enumerable.Range(0, 10);
+        Assert.Throws<ArgumentNullException>(() => items.TryGetFirst(out _, null));
     }
 }
