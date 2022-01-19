@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 namespace Mulinq.Linq;
 
 public static partial class EnumerableExtension

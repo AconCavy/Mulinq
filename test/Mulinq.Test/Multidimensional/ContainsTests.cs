@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Mulinq.Multidimensional;
 using NUnit.Framework;
 

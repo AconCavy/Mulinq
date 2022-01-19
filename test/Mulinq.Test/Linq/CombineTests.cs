@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Mulinq.Linq;
 using NUnit.Framework;
 

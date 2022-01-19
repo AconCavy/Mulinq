@@ -1,4 +1,3 @@
-using System;
 using Mulinq.Multidimensional;
 using NUnit.Framework;
 

@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace Mulinq.Multidimensional;
 
 public static partial class ArrayExtension

@@ -1,5 +1,3 @@
-using System;
-
 namespace Mulinq.Multidimensional;
 
 public static partial class ArrayExtension
