@@ -51,7 +51,7 @@ public class ColumnTests
     public void ArgumentNullTest()
     {
         int[,]? sut = null;
-        Assert.Throws<ArgumentNullException>(() => _ = sut.Column(0).ToArray());
+        Assert.Throws<ArgumentNullException>(() => _ = sut.Column(0));
         Assert.Throws<ArgumentNullException>(() => _ = sut.Columns(0, 1).ToArray());
     }
 

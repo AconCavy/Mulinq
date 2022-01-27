@@ -11,15 +11,17 @@ public static partial class ArrayExtension
     /// <returns>The sequence of the specified column of the 2-dimensional array.</returns>
     /// <exception cref="ArgumentNullException">source is null.</exception>
     /// <exception cref="ArgumentOutOfRangeException">index &lt; 0 or column &lt;= index.</exception>
-    public static IEnumerable<TSource> Column<TSource>(this TSource[,]? source, int index)
+    public static TSource[] Column<TSource>(this TSource[,]? source, int index)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         var (row, column) = (source.GetLength(0), source.GetLength(1));
         if (index < 0 || column <= index) throw new ArgumentOutOfRangeException(nameof(index));
 
-        IEnumerable<TSource> Inner()
+        TSource[] Inner()
         {
-            for (var i = 0; i < row; i++) yield return source[i, index];
+            var result = new TSource[row];
+            for (var i = 0; i < row; i++) result[i] = source[i, index];
+            return result;
         }
 
         return Inner();
@@ -37,20 +39,20 @@ public static partial class ArrayExtension
     /// <exception cref="ArgumentOutOfRangeException">
     ///     start &lt; 0 or column &lt;= start or count &lt;= 0 or column &lt; start + count
     /// </exception>
-    public static IEnumerable<IEnumerable<TSource>> Columns<TSource>(this TSource[,]? source, int start, int count)
+    public static IEnumerable<TSource[]> Columns<TSource>(this TSource[,]? source, int start, int count)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         var (row, column) = (source.GetLength(0), source.GetLength(1));
         if (start < 0 || column <= start) throw new ArgumentOutOfRangeException(nameof(start));
         if (count <= 0 || column < start + count) throw new ArgumentOutOfRangeException(nameof(count));
 
-        IEnumerable<IEnumerable<TSource>> Inner()
+        IEnumerable<TSource[]> Inner()
         {
             for (var c = start; c < start + count; c++)
             {
-                var ret = new TSource[row];
-                for (var i = 0; i < row; i++) ret[i] = source[i, c];
-                yield return ret;
+                var result = new TSource[row];
+                for (var i = 0; i < row; i++) result[i] = source[i, c];
+                yield return result;
             }
         }
 
