@@ -42,8 +42,8 @@ public class RowTests
             for (var j = 1; i + j <= r; j++)
             {
                 var expected = all.Skip(i).Take(j);
-                var actual = sut.Rows(0, r);
-                Assert.That(actual, Is.EqualTo(all));
+                var actual = sut.Rows(i, j);
+                Assert.That(actual, Is.EqualTo(expected));
             }
     }
 
@@ -51,7 +51,7 @@ public class RowTests
     public void ArgumentNullTest()
     {
         int[,]? sut = null;
-        Assert.Throws<ArgumentNullException>(() => _ = sut.Row(0).ToArray());
+        Assert.Throws<ArgumentNullException>(() => _ = sut.Row(0));
         Assert.Throws<ArgumentNullException>(() => _ = sut.Rows(0, 1).ToArray());
     }
 
