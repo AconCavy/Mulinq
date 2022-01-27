@@ -11,23 +11,24 @@ public static partial class EnumerableExtension
     /// <returns>The sequences that split by specified size.</returns>
     /// <exception cref="ArgumentNullException">source is null.</exception>
     /// <exception cref="ArgumentException">size &lt;= 0</exception>
-    public static IEnumerable<IEnumerable<TSource>> SplitBy<TSource>(this IEnumerable<TSource>? source, int size)
+    public static IEnumerable<IEnumerable<TSource>> Chunk<TSource>(this IEnumerable<TSource>? source, int size)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (size <= 0) throw new ArgumentException(nameof(size));
 
-        IEnumerable<IEnumerable<TSource>> Inner()
+        IEnumerable<TSource[]> Inner()
         {
             var idx = 0;
-            var ret = new TSource[size];
+            var result = new TSource[size];
             foreach (var x in source)
             {
-                ret[idx++] = x;
-                if (idx == size) yield return ret;
+                result[idx++] = x;
+                if (idx != size) continue;
+                yield return result;
                 idx %= size;
             }
 
-            if (idx > 0) yield return ret[..idx];
+            if (idx > 0) yield return result[..idx];
         }
 
         return Inner();
