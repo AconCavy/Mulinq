@@ -20,6 +20,7 @@ dotnet add package Mulinq
 
 - Transform
     - Cumulate
+    - Deduplicate
     - Delta
     - SkipEach
     - SplitBy
