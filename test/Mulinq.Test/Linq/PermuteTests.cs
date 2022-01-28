@@ -13,12 +13,16 @@ public class PermuteTests
 
         var expected = new List<int[]>();
         for (var a = 1; a <= count; a++)
+        {
             for (var b = 1; b <= count; b++)
+            {
                 for (var c = 1; c <= count; c++)
                 {
                     if (a == b || b == c || c == a) continue;
                     expected.Add(new[] { a, b, c });
                 }
+            }
+        }
 
         var actual = items.Permute(count);
 
@@ -33,11 +37,13 @@ public class PermuteTests
 
         var expected = new List<int[]>();
         for (var a = 1; a <= count; a++)
+        {
             for (var b = 1; b <= count; b++)
             {
                 if (a == b) continue;
                 expected.Add(new[] { a, b });
             }
+        }
 
         var actual = items.Permute(2);
 
@@ -52,14 +58,32 @@ public class PermuteTests
 
         var expected = new List<int[]>();
         for (var a = 1; a <= count; a++)
+        {
             for (var b = 1; b <= count; b++)
+            {
                 for (var c = 1; c <= count; c++)
                 {
                     if (a == b || b == c || c == a) continue;
                     expected.Add(new[] { a, b, c });
                 }
+            }
+        }
 
         var actual = items.Permute(3);
+
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void PermuteToArrayTest()
+    {
+        var sut = new[] { 1, 2, 3 };
+        var expected = new[]
+        {
+            new[] { 1, 2, 3 }, new[] { 1, 3, 2 }, new[] { 2, 1, 3 }, new[] { 2, 3, 1 }, new[] { 3, 1, 2 },
+            new[] { 3, 2, 1 }
+        };
+        var actual = sut.Permute(3).ToArray();
 
         Assert.That(actual, Is.EqualTo(expected));
     }

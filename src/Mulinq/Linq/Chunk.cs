@@ -11,7 +11,7 @@ public static partial class EnumerableExtension
     /// <returns>The sequences that split by specified size.</returns>
     /// <exception cref="ArgumentNullException">source is null.</exception>
     /// <exception cref="ArgumentException">size &lt;= 0</exception>
-    public static IEnumerable<IEnumerable<TSource>> Chunk<TSource>(this IEnumerable<TSource>? source, int size)
+    public static IEnumerable<TSource[]> Chunk<TSource>(this IEnumerable<TSource>? source, int size)
     {
         if (source is null) throw new ArgumentNullException(nameof(source));
         if (size <= 0) throw new ArgumentException(nameof(size));
@@ -25,6 +25,7 @@ public static partial class EnumerableExtension
                 result[idx++] = x;
                 if (idx != size) continue;
                 yield return result;
+                result = new TSource[size];
                 idx %= size;
             }
 
