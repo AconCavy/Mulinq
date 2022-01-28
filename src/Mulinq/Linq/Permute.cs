@@ -36,18 +36,18 @@ public static partial class EnumerableExtension
                 cycles[i] = n - i;
             }
 
-            var result = new TSource[count];
-
-            void Fill()
+            TSource[] Result()
             {
+                var result = new TSource[count];
                 for (var i = 0; i < count; i++)
                 {
                     result[i] = items[indices[i]];
                 }
+
+                return result;
             }
 
-            Fill();
-            yield return result;
+            yield return Result();
             while (true)
             {
                 var done = true;
@@ -66,8 +66,7 @@ public static partial class EnumerableExtension
                     else
                     {
                         (indices[i], indices[^cycles[i]]) = (indices[^cycles[i]], indices[i]);
-                        Fill();
-                        yield return result;
+                        yield return Result();
                         done = false;
                         break;
                     }
